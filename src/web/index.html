@@ -118,6 +118,7 @@ gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
 	const root = gltf.scene;
 	const mixer = new THREE.AnimationMixer(gltf.scene);
 	for (const anim of gltf.animations) {
+		console.log("got anim");
 		mixer.clipAction(anim).play();
 	}
 
