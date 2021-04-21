@@ -111,9 +111,16 @@ function animate1() {
 
 camera.position.z = 5;
 const gltfLoader = new GLTFLoader();
+
+const objs = [];
 gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
 	console.log("found file!");
 	const root = gltf.scene;
+	const mixer = new THREE.AnimationMixer(gltf.scene);
+	for (const anim of gltf.animations) {
+		mixer.clipAction(anim).play();
+	}
+
 	scene.add(root);
 	 const box = new THREE.Box3().setFromObject(root);
 
@@ -127,6 +134,7 @@ gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
       controls.maxDistance = boxSize * 10;
       controls.target.copy(boxCenter);
       controls.update();
+      objs.push({gltf, mixer});
   });
 
 
@@ -153,7 +161,15 @@ gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
     requestAnimationFrame(render);
   }
 
-  requestAnimationFrame(render);
+  //requestAnimationFrame(render);
+  const clock = new THREE.Clock();
+  (function animate() {
+  	objs.forEach(({mixer}) => {mixer.update(clock.getDelta());});
+	renderer.render(scene, camera);
+	requestAnimationFrame(animate);
+
+    }
+   )();
 
 //animate();
 console.log("hello World");
