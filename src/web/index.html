@@ -55,14 +55,16 @@ function animate1() {
     const repeats = planeSize / 2;
     texture.repeat.set(repeats, repeats);
 
+/*
     const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
     const planeMat = new THREE.MeshPhongMaterial({
       map: texture,
       side: THREE.DoubleSide,
     });
-    const mesh = new THREE.Mesh(planeGeo, planeMat);
-    mesh.rotation.x = Math.PI * -.5;
-    scene.add(mesh);
+*/
+    //const mesh = new THREE.Mesh(planeGeo, planeMat);
+    //mesh.rotation.x = Math.PI * -.5;
+    //scene.add(mesh);
   }
 
   {
@@ -113,7 +115,8 @@ camera.position.z = 5;
 const gltfLoader = new GLTFLoader();
 
 const objs = [];
-gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
+//gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
+gltfLoader.load('./golf_scott_cube_plane_animate.glb', (gltf) => {
 	console.log("found file!");
 	const root = gltf.scene;
 	const mixer = new THREE.AnimationMixer(gltf.scene);
