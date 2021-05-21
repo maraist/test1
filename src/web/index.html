@@ -116,7 +116,11 @@ const gltfLoader = new GLTFLoader();
 
 const objs = [];
 //gltfLoader.load('./dr-scott-0.0.1.glb', (gltf) => {
-gltfLoader.load('./golf_scott_cube_plane_animate.glb', (gltf) => {
+var fname = '';
+fname = "./dr-scott-0.0.1.glb";
+fname = './golf_scott_cube_plane_animate.glb';
+fname = './meshlet0.glb';
+gltfLoader.load(fname, (gltf) => {
 	console.log("found file!");
 	const root = gltf.scene;
 	const mixer = new THREE.AnimationMixer(gltf.scene);
